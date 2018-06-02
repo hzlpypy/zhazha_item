@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            //alert(window.location.search);
+            let SEARCH_URL = 'http://127.0.0.1:8000/home/info'+window.location.search;
+            $.get(SEARCH_URL,function (result) {
+                console.log(result);
+                if ( result.state === 200 && result.data.length > 0 ){
+                    let div = $('#list');
+                    for (let obj of result.data) {
+                        $('<li>').append($('<a>').text(obj.game_name).
+                        attr('href','http://127.0.0.1:8000/static/jump.html' + '?gid='+obj.id)).appendTo($('<ul>').appendTo(div));
+                        $('<li>').append($('<a>').text(obj.info).
+                        attr('href','http://127.0.0.1:8000/static/jump.html' + '?gid='+obj.id)).appendTo($('<ul>').appendTo(div))
+                    }
+                }
+
+            })
+        })
+
+    </script>
+</head>
+<body>
+<div id="parent">
+   <div id="list">
+
+
+   </div>
+</div>
+</body>
+</html>

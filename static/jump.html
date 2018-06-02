@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            let JUMP_URL = 'http://127.0.0.1:8000/home/jump' + window.location.search;
+            $.get(JUMP_URL,function (result) {
+                console.log(result);
+                if (result.data.length>0 && result.msg ==='success'){
+                    for (let obj of result.data){
+                        for (let obj1 of obj.info) {
+                            alert(obj1.img_game.substring(obj1.img_game.length-4,obj1.img_game.length));
+                            if (obj1.img_game.substring(obj1.img_game.length-3,obj1.img_game.length === '.mp4'))
+                            {
+                                $('<source>').attr({'src':'http://'+ obj1.img_game,'type':'video/mp4'}).appendTo($("#video"))
+                            }
+                            else {
+                                $("<img>").attr('src','http://'+ obj1.img_game).appendTo($("#imgs"))
+                            }
+
+                        }
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="imgs"></div>
+    <video id="video" controls autoplay name="media">
+
+    </video>
+</body>
+</html>

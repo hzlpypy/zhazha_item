@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            $('#register_btn').click(function () {
+                let REGISTER_URL = 'http://127.0.0.1:8000/register/register/';
+                let username = $('#username').val();
+                let password = $('#password').val();
+                let password_again = $('#again_password').val();
+                let user = {'username':username,'password':password,'again_password':password_again};
+                let setting = {
+                    'type':'POST',
+                    'data':user,
+                    'dataType':'json',
+                    'success':function (data) {
+                        alert(data.res);
+                        if(data.res === 1){
+                            location.href = '/register/index'
+                        }
+                        if(data.res === -1){
+                            $('#errormsg').show().html('两次密码输入不一致')
+                        }
+                        else{
+                            $('#errormsg').show().html('原账户已存在')
+                        }
+                    }
+                };
+                $.ajax(REGISTER_URL,setting)
+            })
+        })
+    </script>
+</head>
+<body>
+<span>用户名:</span><input type="text" PLACEHOLDER="请输入用户名" id="username"><br>
+<span>请输入密码:</span><input type="text" PLACEHOLDER="请输入密码" id="password"><br>
+<span>请再次输入密码</span><input type="text" PLACEHOLDER="请输入密码" id="again_password"><br>
+<div id="errormsg"></div>
+<button value="注册" href="" id="register_btn">注册:</button>
+<br>
+<a href="http://127.0.0.1:8000/static/index.html/"><button value="登录" id="login_btn">登录:</button></a>
+<br>
+<a href="http://127.0.0.1:8000/static/foget_pwd.html"><button value="忘记密码">忘记密码</button></a>
+
+</body>
+</html>

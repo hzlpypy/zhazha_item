@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script language="JavaScript">
+        $(function () {
+            $('#forget_btn').click(function () {
+                let FORGET_URL = 'http://127.0.0.1:8000/register/forget/';
+                let username = $('#username').val();
+                let password = $('#password').val();
+                let password_again = $('#again_password').val();
+                let user = {'username': username, 'password': password, 'again_password': password_again};
+                $.post(FORGET_URL,user,function (data) {
+                    alert(data.res);
+                    if(data.res === 1){
+                        alert('更新成功')
+                    }
+                    if(data.res === -1){
+                        $('#errormsg').show().html('两次密码输入不一致')
+                    }
+                    if(data.res === 0){
+                        $('#errormsg').show().html('用户名不正确请从新输入')
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<span>用户名:</span><input type="text" PLACEHOLDER="请输入用户名" id="username"><br>
+<span>请输入新密码:</span><input type="text" PLACEHOLDER="请输入密码" id="password"><br>
+<span>请再次输入新密码</span><input type="text" PLACEHOLDER="请输入密码" id="again_password"><br>
+<div id="errormsg"></div>
+<button value="提交" id="forget_btn">提交</button>
+<a href="http://127.0.0.1:8000/static/index.html/"><button value="提交" id="forget_btn">登录</button></a>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="keywords"
+          content="阴阳师下载,阴阳师官方下载,阴阳师安卓下载,阴阳师安卓官方下载,阴阳师手游,阴阳师礼包,阴阳师手游下载,阴阳师手游安卓, 阴阳师手游iOS,阴阳师手游苹果,阴阳师助手,网易手游,阴阳师手游 ios,阴阳师,阴阳师 ios,阴阳师手游ios,阴阳师手游安卓,阴阳师安卓,阴阳师 安卓,阴阳师ios,阴阳师 礼包,阴阳师礼包,阴阳师手游 安卓,阴阳师手游 礼包,阴阳师苹果,阴阳师攻略">
+    <meta name="description" content="网易2016自研精品，唯美空灵的和风写意，经典的半即时回合制RPG，卡牌收集、养成，基于LBS地理技术的社交PK，上百种式神亟待觉醒...">
+    <script src="../js/jquery-3.3.1.js"></script>
+    <link rel="dns-prefetch" href="https://nie.res.netease.com">
+    <link rel="stylesheet" type="text/css"
+          href="https://nie.res.netease.com/comm/js/nie/util/alertBox/css/alertBox.css">
+    <link rel="canonical" href="//yys.163.com/">
+    <script>
+        let IMG_URL = 'http://127.0.0.1:8000/static/img/small_img/';
+        $(function () {
+            let add_text_url = 'http://127.0.0.1:8000/home/catalog';
+            $.get(add_text_url, function (result) {
+                if (result.data.length > 0) {
+                    for (let obj of result.data) {
+                        $('.add_title').append(obj.oneinfor);
+                        for (let obj1 of obj.smalltitle) {
+                            let $ul = $('<ul>').appendTo($('#mains'));
+                            let $li = $('<li>').appendTo($ul);
+                            $('<span>').text(obj1.main_branch).appendTo($li);
+                            for (let objs of obj1.pagegames) {
+                                let ul_s = $('<ul>').appendTo($li);
+                                let li_s = $('<li>').appendTo(ul_s);
+                                $('<a>').attr('href', 'http://127.0.0.1:8000/static/jump.html' + '?gname=' + objs.game_name).text(objs.game_name).appendTo(li_s);
+                            }
+                            for (let obj2 of obj1.inforgame) {
+                                let uls = $('<ul>').appendTo($li);
+                                let lis = $('<li>').appendTo(uls);
+                                $('<span>').text(obj2.content).appendTo(lis);
+                                for (let obj3 of obj2.imggame) {
+                                    let kk = $('<a>').attr('href', 'http://127.0.0.1:8000/static/jump.html' + '?gname=' + obj3.game_name)
+                                        .text(obj3.game_name);
+                                    kk.appendTo(
+                                        $('<li>').appendTo(
+                                            $('<ul>').appendTo(lis)));
+                                    for (let obj4 of obj3.img) {
+                                        $('<img>').attr('src', IMG_URL + obj4.img_name + '.png').appendTo(kk)
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            })
+
+        });
+        $(function () {
+            $('.hljs-value').click(function () {
+                let info = $('.game_info').val();
+                //let SEARCH_URL = 'http://127.0.0.1:8000/home/search?key='+info;
+                let SEARCH_URL = '';
+                $.get(SEARCH_URL,function (fun) {
+                    console.log(fun);
+                    location.href = 'http://127.0.0.1:8000/static/search.html'+'?key='+info;
+                    /**for (let obj of fun.data) {
+                        $('<a>').text(obj.game_name+obj.info).appendTo($('<li>').appendTo($('#linshi')));
+
+                    }
+                     */
+                })
+            })
+        })
+    </script>
+
+</head>
+<body>
+<div id="head_img">
+    <img src="#">
+</div>
+<div id="page_game">
+    <ul id="linshi">
+
+    </ul>
+    <div class="search-label-icon">
+        <input type="text" placeholder="请输入需要搜索的游戏" class="game_info">
+        <input type="submit" class="hljs-value" value="搜素">
+    </div>
+    <ul>
+        <li><a>注册账号</a></li>
+        <li><a>安卓充值</a></li>
+        <li id="mains">
+            <span class="add_title"></span>
+
+            <!--
+            <ul>
+                <li>
+                    <span>客户端游戏</span>
+                    <ul>
+                        <li>
+                            <span>角色扮演</span>
+                            <ul>
+                                <li>梦幻西游</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            -->
+        </li>
+        <li><a>将军令</a></li>
+    </ul>
+</div>
+<!--头部-->
+<div id="NIE-topBar"></div>
+<div id="share">
+    <div id="share_title">您收到一封来自阴阳寮的手信</div>
+    <div id="share_url"></div>
+    <img id="share_pic" src="/static/img/banner/share_1209643.jpg"
+         data-src="#">
+    <div id="share_desc">魑魅魍魉，和风写意，以阴阳师之名行走于人鬼两界之间......来吧，与我们一同踏上这段唯美和风奇幻之旅。</div>
+</div>
+<div id="main">
+    <div id="top_bar">
+        <div class="left_part">
+            <p class="download_txt">扫码下载</p>
+            <img src="https://adl.netease.com/d/g/yys/c/gw/qr">
+            <a class="logo_wrap" href="//yys.163.com/index.html" target="_blank">
+                <span class="logo_icon"></span>
+                <div class="game_name">
+                    <h3>阴阳师</h3>
+                    <p>网易和风匠心巨制</p>
+                </div>
+            </a>
+        </div>
+        <ul class="topnav_list">
+            <li class="topnav_li"><a class="nav_item" href="//yys.163.com/index.html" target="_blank">官网首页</a><span
+                    class="line"></span></li>
+            <li class="topnav_li"><a class="nav_item" href="//yys.163.com/news/index.html" target="_blank">新闻资讯</a><span
+                    class="line"></span></li>
+            <li class="topnav_li xxhd hide"><a class="nav_item" href="//yys.163.com/news/huodong/index.html"
+                                               target="_blank">线下活动</a><span class="line"></span></li>
+            <li class="topnav_li"><a class="nav_item" href="//yys.163.com/skill/index.html"
+                                     target="_blank">游戏攻略</a><span class="line"></span></li>
+            <li class="topnav_li ssl hide"><a class="nav_item" href="//yys.163.com/shishen/index.html" target="_blank">式神录</a><span
+                    class="line"></span></li>
+            <li class="topnav_li zjl hide"><a class="nav_item" href="//yys.163.com/zj/index.html"
+                                              target="_blank">主角录</a><span class="line"></span></li>
+            <!-- <li class="topnav_li"><a class="nav_item" href="//yys.163.com/ts/index.html" target="_blank">游戏特色</a><span class="line"></span></li> -->
+            <li class="topnav_li"><a href="//tuku.yys.163.com/s/index.html" target="_blank" class="nav_item">同人社区<em
+                    class="arrow"></em></a><span class="line"></span></li>
+            <li class="topnav_li"><a href="javascript:void(0);" class="nav_item" data-tab="qudao">官方渠道<em
+                    class="arrow"></em></a><span class="line"></span></li>
+            <li class="topnav_li"><a href="https://gift.163.com/index_yys.html" target="_blank"
+                                     class="nav_item">周边商城</a><span class="line"></span></li>
+            <li class="topnav_li"><a href="//yys.cbg.163.com/" target="_blank" class="nav_item">藏宝阁</a></li>
+        </ul>
+        <div class="topbar_more">
+		<div class="topbar_more_list clearfix tongren " data-tab="tongren">
+			<a href="//tuku.yys.163.com/s/channel.html?id=57cd51f44836e916b7aed893" class="list_item" target="_blank">
+				<span class="inner_item">
+					<span class="pic cos"></span>
+					<span class="name">玩家COS</span>
+				</span>
+			</a>
+			<a href="//tuku.yys.163.com/s/channel.html?id=57cd514394ca6e78ea837ce0" class="list_item firstone" target="_blank">
+				<span class="inner_item">
+					<span class="pic huihua"></span>
+					<span class="name">同人绘画</span>
+				</span>
+			</a>
+
+		</div>
+		<div class="topbar_more_list qudao" data-tab="qudao">
+			<div class="qq_team">
+				<ul class="clearfix">
+					<li class="qq">204422345（1群）</li>
+					<li class="qq">586180977（6群）</li>
+					<li class="qq">540687051（2群）</li>
+					<li class="qq">477094979（7群）</li>
+					<li class="qq">546653739（3群）</li>
+					<li class="qq">239033695（8群）</li>
+					<li class="qq">546027375（4群）</li>
+					<li class="qq">478814406（9群）</li>
+					<li class="qq">344590267（5群）</li>
+					<li class="qq">478027123（10群）</li>
+				</ul>
+				<p>官方QQ群</p>
+            </div>
+			</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

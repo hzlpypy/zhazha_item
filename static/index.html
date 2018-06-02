@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>爱上阴阳师</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+            $('#login_btn').click(function () {
+                let LOGIN_URL = 'http://127.0.0.1:8000/register/login/';
+                let username = $('#username').val();
+                let password = $('#password').val();
+                let user = {'username':username,'password':password};
+                $.post(LOGIN_URL,user,function (data) {
+                    alert(data.res);
+                    if(data.res === 1){
+                        location.href = 'http://127.0.0.1:8000/'
+                    }
+                    else{
+                        $('#errormsg').show().html('账号密码错误')
+                    }
+                })
+            })
+        })
+    </script>
+    <style type="text/css">
+        #imgs {
+            height: 700px;
+            width: 1400px;
+        }
+
+        #register {
+            position: relative;
+            bottom: 600px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="parent">
+    <div id="cover_img">
+        <img id="imgs" src="http://127.0.0.1:8000/static/img/cover/timg (2).jpg">
+    </div>
+
+    <div id="register">
+        <span>用户名:</span><input type="text" PLACEHOLDER="请输入用户名" id="username"><br>
+        <span>密码:</span><input type="text" PLACEHOLDER="请输入密码" id="password"><br>
+        <div id="errormsg"></div>
+        <button value="登录" id="login_btn">登录:</button>
+        <br>
+        <a href="http://127.0.0.1:8000/static/register.html"><button value="注册" >注册:</button></a>
+        <br>
+        <a href="http://127.0.0.1:8000/static/foget_pwd.html"><button value="忘记密码">忘记密码</button></a>
+    </div>
+</div>
+</body>
+</html>
